@@ -4,17 +4,20 @@ import { expect, $ } from '@wdio/globals'
 import LoginPage from '../pageobjects/login.page.js';
 import SecurePage from '../pageobjects/secure.page.js';
 
-const pages = {
+const pages:Record<string,typeof LoginPage> = {
     login: LoginPage
 }
 
-Given(/^I am on the (\w+) page$/, async (page) => {
+Given(/^I am on the (\w+) page$/, async (page:string) => {
     await pages[page].open()
 });
 
 When(/^I login with (\w+) and (.+)$/, async (username, password) => {
     await LoginPage.login(username, password)
+    await LoginPage.add();
 });
+
+
 
 Then(/^I should see a flash message saying (.*)$/, async (message) => {
     await expect(SecurePage.flashAlert).toBeExisting();
