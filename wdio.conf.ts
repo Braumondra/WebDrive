@@ -1,4 +1,6 @@
+//@ts-ignore
 import { JSONReporter, HTMLReportGenerator } from 'wdio-json-html-reporter';
+
 export const config: WebdriverIO.Config = {
     //
     // ====================

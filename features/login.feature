@@ -1,12 +1,15 @@
-Feature: The Internet Guinea Pig Website
+Feature: Login
 
-  Scenario Outline: As a user, I can log into the secure area
+  Scenario Outline: Login validation
 
     Given I am on the login page
     When I login with <username> and <password>
-    Then I should see a flash message saying <message>
+    Then I should see <result>
 
     Examples:
-      | username | password             | message                        |
-      | tomsmith | SuperSecretPassword! | You logged into a secure area! |
-      | foobar   | barfoo               | Your username is invalid!      |
+      | username        | password     | result                                                                    |
+      | standard_user   | secret_sauce | Products                                                                  |
+      | locked_out_user | secret_sauce | Epic sadface: Sorry, this user has been locked out.                       |
+      | invalid_user    | wrong_pass   | Epic sadface: Username and password do not match any user in this service |
+      |                 | secret_sauce | Epic sadface: Username is required                                        |
+      | standard_user   |              | Epic sadface: Password is required                                        |
