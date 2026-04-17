@@ -18,7 +18,8 @@ import CartPage from '../pageobjects/CartPage.ts';
     });*/
 Then(/^I should see (.*)$/, async (text) => {
     if (text === 'Products') {
-        await expect(InventoryPage.title).toHaveText('Products');
+        await expect(InventoryPage.title).toBeDisplayed();
+        await expect(InventoryPage.title).toHaveText(text);
     } else {
         await expect(LoginPage.errorMessage).toBeDisplayed();
         await expect(LoginPage.errorMessage)
