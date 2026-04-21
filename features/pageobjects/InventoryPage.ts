@@ -1,13 +1,13 @@
-import { $ } from '@wdio/globals'
-import Page from './page.js';
+import { $ } from '@wdio/globals';
+import Page from './page';
 
 class InventoryPage extends Page {
 
-    public get title () {
+    public get title() {
         return $('.title');
     }
 
-    public get cartIcon () {
+    public get cartIcon() {
         return $('.shopping_cart_link');
     }
 
@@ -34,17 +34,23 @@ class InventoryPage extends Page {
         ];
 
         for (const product of products) {
-            await this.getAddToCartButton(product).click();
+            const btn = this.getAddToCartButton(product);
+            await btn.waitForDisplayed();
+            await btn.waitForClickable();
+            await btn.click();
         }
     }
 
-    public async goToCart () {
+    public async goToCart() {
+        await this.cartIcon.waitForDisplayed();
+        await this.cartIcon.waitForClickable();
         await this.cartIcon.click();
     }
 
     public async logout() {
+        await this.menuBtn.waitForClickable();
         await this.menuBtn.click();
-        await this.logoutLink.waitForDisplayed();
+        await this.logoutLink.waitForDisplayed({ timeout: 5000 });
         await this.logoutLink.click();
     }
 }
