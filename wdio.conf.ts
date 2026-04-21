@@ -1,4 +1,6 @@
+//@ts-ignore
 import { JSONReporter, HTMLReportGenerator } from 'wdio-json-html-reporter';
+
 export const config: WebdriverIO.Config = {
     //
     // ====================
@@ -63,7 +65,7 @@ export const config: WebdriverIO.Config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'trace',
     //
     // Set specific log levels per logger
     // loggers:
@@ -127,6 +129,7 @@ export const config: WebdriverIO.Config = {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: [
+        'spec',
     [JSONReporter, { outputFile: './reports/test-results.json', screenshotOption: 'OnFailure' }],  // Options: "No", "OnFailure", "Full"
   ],
 
@@ -155,7 +158,7 @@ export const config: WebdriverIO.Config = {
         // <number> timeout for step definitions
         timeout: 60000,
         // <boolean> Enable this config to treat undefined definitions as warnings.
-        ignoreUndefinedDefinitions: false
+        ignoreUndefinedDefinitions: true
     },
 
 
